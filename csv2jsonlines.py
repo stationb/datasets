@@ -7,6 +7,9 @@ if __name__ == '__main__':
     with open(fn) as f:
         with open(fn + '.jsonlines', 'w') as o:
             reader = csv.DictReader(f)
+            counter = 1
             for row in reader:
                 d = dict(row)
+                d['objectid'] = counter
                 o.write(json.dumps(d) + '\n')
+                counter += 1

@@ -1,0 +1,17 @@
+source:
+  uri: oakland/in/trees.geojson
+  format: geojson
+
+transform:
+  tasks:
+    - type: project
+      schema:
+        properties.id: $.properties.FACILITYID
+        properties.species: $.properties.SPECIES
+        properties.street_number: $.properties.ADDRNUM
+        properties.street_name: $.properties.STNAME
+        geometry: $.geometry
+
+sink:
+  uri: oakland/out/trees.jsonlines
+  format: jsonlines

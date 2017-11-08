@@ -1,0 +1,17 @@
+source:
+  uri: oakland/in/buildings.geojson
+  format: geojson
+
+transform:
+  tasks:
+    - type: project
+      schema:
+        properties.id: $.properties.bldgid3
+        properties.type: $.properties.bldgtype
+        properties.name: $.properties.comname
+        properties.stories: $.properties.nostory
+        geometry: $.geometry
+
+sink:
+  uri: oakland/out/buildings.jsonlines
+  format: jsonlines

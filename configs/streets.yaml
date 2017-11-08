@@ -1,0 +1,20 @@
+source:
+  uri: oakland/in/streets.geojson
+  format: geojson
+
+transform:
+  tasks:
+    - type: project
+      schema:
+        properties.id: $.properties.objectid
+        properties.name_short: $.properties.sfeanme
+        properties.suffix: $.properties.sfeatp
+        properties.name_long: $.properties.name
+        properties.city: $.properties.cityl
+        properties.from_street_number: $.properties.fraddr
+        properties.to_street_number: $.properties.toaddr
+        geometry: $.geometry
+
+sink:
+  uri: oakland/out/streets.jsonlines
+  format: jsonlines

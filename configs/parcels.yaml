@@ -1,0 +1,14 @@
+source:
+  uri: oakland/in/parcels.geojson
+  format: geojson
+
+transform:
+  tasks:
+    - type: project
+      schema:
+        properties.apn: $.properties.apn
+        geometry: $.geometry
+
+sink:
+  uri: oakland/out/parcels.jsonlines
+  format: jsonlines

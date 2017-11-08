@@ -1,0 +1,22 @@
+source:
+  uri: oakland/in/address_points.geojson
+  format: geojson
+
+transform:
+  tasks:
+    - type: project
+      schema:
+        properties.id: $.properties.objectid
+        properties.address: $.properties.address_lo
+        properties.street_number: $.properties.st_num
+        properties.street_name: $.properties.feanme
+        properties.street_suffix: $.properties.featyp
+        properties.unit_prefix: $.properties.unit_typ
+        properties.unit_number: $.properties.unit
+        properties.city: $.properties.city
+        properties.zip: $.properties.zipcode
+        geometry: $.geometry
+
+sink:
+  uri: oakland/out/address_points.jsonlines
+  format: jsonlines

@@ -1,0 +1,15 @@
+source:
+  uri: oakland/in/street_lights.jsonlines
+  format: jsonlines
+
+transform:
+  tasks:
+    - type: project
+      schema:
+        properties.id: $.OBJECTID
+        properties.street_number: $.STNO
+        properties.street_name: $.STREET_NAM
+
+sink:
+  uri: oakland/out/street_lights.jsonlines
+  format: jsonlines

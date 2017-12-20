@@ -1,8 +1,9 @@
 import json
+import logging
 import os
 import requests
 
-GOOGLE_API_KEY = os.environ['GOOGLE_API_KEY']
+GOOGLE_API_KEY = os.environ['GOOGLE_API_KEY_STATIONB']
 
 
 def _get_coords(address, key=GOOGLE_API_KEY):
@@ -24,7 +25,9 @@ def _get_coords(address, key=GOOGLE_API_KEY):
 def geocode(filename_in, filename_out):
     with open(filename_in, 'rb') as f_in:
         with open(filename_out, 'wb') as f_out:
+            counter = 0
             for row in f_in:
+                print('Geocoding row: %d' % counter)
                 row = json.loads(row)
                 street_number = row.get('STNO').strip()
                 street_name = row.get('STREET_NAM').strip()
@@ -41,6 +44,7 @@ def geocode(filename_in, filename_out):
                         }
                         f_out.write(json.dumps(row_out))
                         f_out.write('\n')
+                counter += 1
 
 
 if __name__ == '__main__':
